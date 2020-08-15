@@ -14,7 +14,7 @@ Engine::~Engine()
 
 }
 
-bool Engine::Initialize(const char* windowTitle)
+bool Engine::Initialize(const char* windowTitle) // const added 
 {
 	if (!glfwInit())
 	{
@@ -62,12 +62,16 @@ void Engine::Update()
 	glfwPollEvents();
 }
 
-void Engine::Render() // current rendering to back buffer until swap buffer  
+void Engine::BeginRender() // current rendering to back buffer until swap buffer  
 {
 	glClearColor(0, 0, 1, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // bit or
 
-	// ANYTHING DRAWN HERE WILL BE ABLE TO BE SEEN
+}
 
+
+// ANYTHING DRAWN HERE WILL BE ABLE TO BE SEEN
+
+void Engine::EndRender(){
 	glfwSwapBuffers(window);
 }

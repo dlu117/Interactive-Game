@@ -4,8 +4,8 @@
 
 // platform equilvalent version 
 
-#ifndef TWITCH_ENGINE
-#define TWITCH_ENGINE
+#ifndef ENGINE
+#define ENGINE
 
 #include "GLFW/glfw3.h"
 #pragma comment(lib, "opengl32.lib")  // link library
@@ -25,10 +25,11 @@ public:
 	Engine();
 	~Engine();
 
-	bool Initialize(const char* windowTitle); 
+	bool Initialize(const char* windowTitle); // const added
 
 	void Update();
-	void Render();
+	void BeginRender();
+	void EndRender();
 
 private:
 	static GLFWwindow* window;
