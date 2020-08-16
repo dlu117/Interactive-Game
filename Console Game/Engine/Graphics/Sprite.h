@@ -4,6 +4,7 @@
 #include "GLFW/glfw3.h"
 #include "Texture.h"
 
+// displays texture at a certain location
 
 #include <iostream>
 #include <string>
@@ -19,11 +20,20 @@ public:
 	void Update();
 	void Render();
 
+	
+	void SetPos(float x, float y);
+	void SetRot(float x);
+	void SetScale(float x);
+	void SetScale(float x, float y);
+	
 
 private:
 	Texture texture;
 	float xpos;
 	float ypos;
+	float rot; //rotation
+	float xScale;
+	float yScale;
 };
 
 #endif

@@ -8,7 +8,7 @@ Texture::Texture()
 Texture::Texture(int _id)
 {
 	id = _id;
-	if (GetTextureParams())
+	if (!GetTextureParams())
 	{
 		cout << "Error loading image:" << id << endl;
 	}
@@ -16,8 +16,8 @@ Texture::Texture(int _id)
 
 Texture::Texture(string path)
 {
-	id = SOIL_load_OGL_texture(path.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MULTIPLY_ALPHA);
-	if (GetTextureParams()) 
+	id = SOIL_load_OGL_texture(path.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MULTIPLY_ALPHA | SOIL_FLAG_INVERT_Y); //  SOIL_FLAG_INVERT_Y ensures image is flipped  properly
+	if (!GetTextureParams()) 
 	{
 		cout << "Error loading image:"<<path<<endl;
 	}

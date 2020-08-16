@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "IO/Mouse.h"
 
 int Engine::SCREEN_WIDTH = 1000;
 int Engine::SCREEN_HEIGHT = 650;
@@ -35,6 +36,11 @@ bool Engine::Initialize(const char* windowTitle) // const added
 	glfwGetFramebufferSize(window, &width, &height);
 	glfwSwapInterval(1);  // swap current and back buffer
 
+	// Tell gfw what the mouse callbacks are
+	glfwSetCursorPosCallback(window, Mouse::MousePosCallback);
+	glfwSetMouseButtonCallback(window, Mouse::MouseButtonCallback);
+	
+
 	const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 	int xPos = (mode->width - SCREEN_WIDTH) / 2;
 	int yPos = (mode->height - SCREEN_HEIGHT) / 2;
@@ -59,7 +65,7 @@ bool Engine::Initialize(const char* windowTitle) // const added
 
 void Engine::Update()
 {
-	glfwPollEvents();
+	glfwPollEvents(); // handles evnet in queue
 }
 
 void Engine::BeginRender() // current rendering to back buffer until swap buffer  
@@ -70,7 +76,7 @@ void Engine::BeginRender() // current rendering to back buffer until swap buffer
 }
 
 
-// ANYTHING DRAWN HERE WILL BE ABLE TO BE SEEN
+// ONLY THINGS DRAWN HERE WILL BE ABLE TO BE SEEN
 
 void Engine::EndRender(){
 	glfwSwapBuffers(window);

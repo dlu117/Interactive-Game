@@ -5,6 +5,7 @@ Sprite::Sprite()
 {
 	xpos = 0;
 	ypos = 0;
+	rot = 0;
 	texture = Texture();
 }
 
@@ -13,6 +14,7 @@ Sprite::Sprite(string imagePath)
 	texture = Texture(imagePath);
 	xpos = 0;
 	ypos = 0;
+	rot = 0;
 }
 
 Sprite::Sprite(string imagePath, float _xpos, float y_pos)
@@ -20,11 +22,12 @@ Sprite::Sprite(string imagePath, float _xpos, float y_pos)
 	texture = Texture(imagePath);
 	xpos = _xpos;
 	ypos = y_pos;
+	rot = 0; 
 }
 
 void Sprite::Update()
 {
-
+	rot++;
 }
 
 void Sprite::Render()
@@ -35,6 +38,8 @@ void Sprite::Render()
 
 	//TRANSLATE -> ROTATE -> SCALE 
 	glTranslatef(xpos, ypos, 0);
+	glRotatef(rot, 0, 0, 1);
+	glScalef(xScale,yScale,1);
 
 
 	//Rendering
@@ -51,3 +56,26 @@ void Sprite::Render()
 	glDisable(GL_TEXTURE_2D);
 }   
 
+void Sprite::SetPos(float x, float y)
+{
+	xpos = x;
+	ypos = y;
+
+}
+
+void Sprite::SetRot(float x)
+{
+	rot = x;
+}
+
+void Sprite::SetScale(float x)
+{
+	xScale = x;
+	yScale = x;
+}
+
+void Sprite::SetScale(float x, float y)
+{
+	xScale = x;
+	yScale = y;
+}
