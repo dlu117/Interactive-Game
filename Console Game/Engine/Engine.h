@@ -21,7 +21,7 @@ class Engine
 public:
 	static int SCREEN_WIDTH;
 	static int SCREEN_HEIGHT;
-	static double GetDT();
+	static float GetDT();
 
 	Engine();
 	~Engine();
@@ -34,8 +34,8 @@ public:
 
 private:
 	static GLFWwindow* window;
-	static double dt; // static as don't want to insentiate a new engine to check delta time
-	double lastTime;
+	static float dt; // static as don't want to insentiate a new engine to check delta time
+	float lastTime;
 };
 
 
