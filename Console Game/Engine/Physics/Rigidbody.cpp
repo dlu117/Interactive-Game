@@ -3,6 +3,7 @@
 
 
 #include <vector>
+
 using namespace std;
 
 Rigidbody::Rigidbody()
@@ -25,16 +26,16 @@ void Rigidbody::Initialize(float _friction, float _gravity, Vector3* _pos, float
 
 void Rigidbody::Update()
 {
+	
 	vel.x *= friction;
 	vel.y += gravity;
-
+	cout << "x: " << vel.x << "y: " << vel.y << endl;
 	*pos = *pos + (vel * Engine::GetDT());
-     vel = Vector3(0); //reset vector to 0
-
+	vel = Vector3(0); 
 
 }
 
-void Rigidbody::Render(Vector3 c)
+void Rigidbody::Render(Vector3 c)  // colour vector
 {
 	glLoadIdentity();
 
@@ -63,6 +64,11 @@ void Rigidbody::Render(Vector3 c)
 
 }
 
+void Rigidbody::SetVel(Vector3 _vel)
+{
+	vel = _vel;
+}
+
 void Rigidbody::AddForce(Vector3 force)
 {
 	vel = vel + force;
@@ -73,10 +79,7 @@ Vector3 Rigidbody::GetVel()
 	return vel;
 }
 
-void Rigidbody::SetVel(Vector3 _vel)
-{
-	vel = _vel;
-}
+
 
 /*
 bool Rigidbody::IsColliding(const Rigidbody& rbA, const Rigidbody& rbB)

@@ -23,13 +23,16 @@ public:
 
 private:
 	Vector3* pos;
+
 	float* rot;
 	Vector3* scale;
+
 	Vector3* size;
 	
 	float gravity;
 	float friction;
-	Vector3 vel;
+
+	Vector3 vel; //velocity
 
 };
 

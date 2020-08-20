@@ -1,8 +1,7 @@
-// handles frames
-
 #include "Engine.h"
 #include "IO/Mouse.h"
 #include "IO/Keyboard.h"
+
 
 int Engine::SCREEN_WIDTH = 1024;
 int Engine::SCREEN_HEIGHT = 768;
@@ -21,12 +20,17 @@ Engine::~Engine()
 
 bool Engine::Initialize(const char* windowTitle) // const added 
 {
+ 
+	// CODE DIRECT FROM GLFW DOCUMENTATION
+
+	/* Initialize the library */
 	if (!glfwInit())
 	{
 		cout << "Error initializing GLFW" << endl;
 		return false;
 	}
 
+	/* Create a windowed mode window and its OpenGL context */
 	window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, windowTitle, NULL, NULL);
 	if (window == NULL)
 	{
@@ -34,22 +38,26 @@ bool Engine::Initialize(const char* windowTitle) // const added
 		return false;
 	}
 
-	//GLFW Setup
+	// GLFW SETUP
+	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
+
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);
-	glfwSwapInterval(1);  // swap current and back buffer
+	glfwSwapInterval(1);  
 
-	// Tell gfw what the mouse callbacks are
+
+	// Tell GFW what the mouse callbacks are
 	glfwSetCursorPosCallback(window, Mouse::MousePosCallback);
 	glfwSetMouseButtonCallback(window, Mouse::MouseButtonCallback);
 	glfwSetKeyCallback(window, Keyboard::KeyCallback);
 	
-
+	// Positions window in the middle
 	const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 	int xPos = (mode->width - SCREEN_WIDTH) / 2;
 	int yPos = (mode->height - SCREEN_HEIGHT) / 2;
 	glfwSetWindowPos(window, xPos, yPos);
+
 
 	//GL Setup 
 	//Viewport
@@ -70,26 +78,26 @@ bool Engine::Initialize(const char* windowTitle) // const added
 	return true;
 }
 
+
 void Engine::Update()
 {
 	float now = (float)glfwGetTime();
 	dt = (now - lastTime);
 	lastTime = now;
-	glfwPollEvents(); // handles event in queue
+	glfwPollEvents(); /* Poll for and process events */
 }
+
 
 void Engine::BeginRender() // current rendering to back buffer until swap buffer  
 {
 	glClearColor(0, 0, 1, 1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // bit or
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // bit  or ??
 
 }
 
 
-// ONLY THINGS DRAWN HERE WILL BE ABLE TO BE SEEN
-
 void Engine::EndRender(){
-	glfwSwapBuffers(window);
+	glfwSwapBuffers(window);  /* Swap front and back buffers */
 }
 
 

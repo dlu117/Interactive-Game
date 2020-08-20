@@ -1,8 +1,9 @@
 // #pragma - once ensures header files are  not included  multiple times
 //         - windows
-
-
 // platform equilvalent version 
+
+
+// Class handles window and rendering of the frames
 
 #ifndef ENGINE
 #define ENGINE
@@ -34,7 +35,7 @@ public:
 
 private:
 	static GLFWwindow* window;
-	static float dt; // static as don't want to insentiate a new engine to check delta time
+	static float dt; // static so don't have to insentiate a new engine to check delta time
 	float lastTime;
 };
 

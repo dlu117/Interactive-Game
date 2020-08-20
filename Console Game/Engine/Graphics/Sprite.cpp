@@ -4,11 +4,10 @@
 
 Sprite::Sprite()
 {
-	//xpos = 0;
-	//ypos = 0;
+	
 	pos = Vector3(0);
 	rot = 0;
-	speed = 500;
+	speed = 5;
 	texture = Texture();
 	scale = Vector3(1);
 	size = Vector3(0);
@@ -17,24 +16,20 @@ Sprite::Sprite()
 Sprite::Sprite(string imagePath)
 {
 	texture = Texture(imagePath);
-	//xpos = 0;
-	//ypos = 0;
 	pos = Vector3(0);
 	rot = 0; 
-	speed = 500;
+	speed = 100;
 	scale = Vector3(1);
 	size = Vector3((float)texture.GetWidth(), (float)texture.GetHeight(), 1);
 
 }
 
-Sprite::Sprite(string imagePath, Vector3 v) //float _xpos, float y_pos
+Sprite::Sprite(string imagePath, Vector3 v) 
 {
 	texture = Texture(imagePath);
-	//xpos = _xpos;
-	//ypos = y_pos;
 	pos = v;
 	rot = 0;
-	speed = 500;
+	speed = 100;
 	scale = Vector3(1);
 	size = Vector3((float)texture.GetWidth(), (float)texture.GetHeight(), 1);
 }
@@ -51,11 +46,6 @@ void Sprite::Render()
 	glLoadIdentity();
 
 	//TRANSLATE -> ROTATE -> SCALE 
-
-	//glTranslatef(xpos, ypos, 0);
-	//glRotatef(rot, 0, 0, 1);
-	//glScalef(xScale,yScale,1);
-
 	glTranslatef(pos.x, pos.y, 0);
 	glRotatef(rot, 0, 0, 1);
 	glScalef(scale.x, scale.y, 1);
@@ -63,7 +53,7 @@ void Sprite::Render()
 
 	//Rendering
 	glColor4f(1, 1, 1, 1);
-	glBegin(GL_QUADS);   // taking each corner of texture image and place it on console screen
+	glBegin(GL_QUADS);   // mapping texture to screen
 	{
 		glTexCoord2f(0, 0);		glVertex2i(0,0);
 		glTexCoord2f(1, 0);		glVertex2i(texture.GetWidth(), 0);
@@ -90,17 +80,14 @@ void Sprite::SpeedBy(float x)
 
 void Sprite::MoveTo(Vector3 v)
 {
-	//xpos = x;
-	//ypos = y;
+
 	pos = v;
 
 }
 
-void Sprite::MoveBy(Vector3 v) //float x, float y
+void Sprite::MoveBy(Vector3 v) 
 {
 	pos = pos + (v * Engine::GetDT());
-	//xpos += (x * Engine::GetDT());
-	//ypos += (y * Engine::GetDT());
 
 }
 
@@ -117,42 +104,40 @@ void Sprite::RotateBy(float x)
 
 void Sprite::SetScale(float x)
 {
-	//xScale = x;
-	//yScale = x;
+	
 	scale = Vector3(x);
 }
 
-void Sprite::SetScale(Vector3 v) //float x, float y
+void Sprite::SetScale(Vector3 v) 
 {
-	//xScale = x;
-	//yScale = y;
+	
 	scale = v;
 }
 
 void Sprite::MoveLeft()
 {
-	//xpos -= (speed *  Engine::GetDT());
+	
 	pos = pos - Vector3((speed * Engine::GetDT()), 0, 0);
 }
 
 
 void Sprite::MoveRight()
 {
-	//xpos += (speed * Engine::GetDT());
+	
 	pos = pos + Vector3((speed * Engine::GetDT()), 0, 0);
 }
 
 
 void Sprite::MoveUp()
 {
-	//ypos += (speed * Engine::GetDT());
+	
 	pos = pos + Vector3(0, (speed * Engine::GetDT()), 0);
 }
 
 
 void Sprite::MoveDown()
 {
-	//ypos -= (speed * Engine::GetDT());
+	
 	pos = pos - Vector3(0, (speed * Engine::GetDT()), 0);
 }
 

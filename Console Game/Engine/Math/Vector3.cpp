@@ -25,12 +25,12 @@ Vector3::Vector3()
 
 Vector3::Vector3(const Vector3& other)  // copy constructor
 {
-	x = other.x; // because public can accesss without getters/setters
+	x = other.x; // public accesss 
 	y = other.y;
 	z = other.z;
 }
 
-Vector3::Vector3(float _x)
+Vector3::Vector3(float _x) // scale
 {
 	x = _x;
 	y = _x;

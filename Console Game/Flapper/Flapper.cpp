@@ -20,11 +20,13 @@ void Flapper::Update()
 {
 
 	sprite.Update();
+
+	
 	rb.Update();
 
 }
 
-void Flapper::Render()
+void Flapper::Render()   
 {
 	sprite.Render();
 	rb.Render(Vector3(0, 0, 0));

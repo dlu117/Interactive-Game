@@ -8,7 +8,7 @@ public:
 	//static Vector3 Project(const Vector3& a, const Vector3& b);
 
 	Vector3();
-	Vector3(const Vector3& other); // can intialize vector based on another vector
+	Vector3(const Vector3& other); // intialize vector based on another vector
 	Vector3(float _x);
 	Vector3(float _x, float _y, float _z);
 
@@ -21,6 +21,8 @@ public:
 	bool operator==(const Vector3& other);
 	bool operator!=(const Vector3& other);
 
+
+	
 	float x;
 	float y;
 	float z;
