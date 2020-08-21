@@ -3,8 +3,8 @@
 #include "IO/Keyboard.h"
 
 
-int Engine::SCREEN_WIDTH = 1024;
-int Engine::SCREEN_HEIGHT = 768;
+int Engine::SCREEN_WIDTH = 500;
+int Engine::SCREEN_HEIGHT = 650;
 GLFWwindow* Engine::window = NULL;
 float Engine::dt = 0;
 

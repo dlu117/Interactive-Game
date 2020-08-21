@@ -4,38 +4,18 @@
 #include "Engine/Engine.h"
 #include <iostream>
 #include <string>
-#include "Flapper/Flapper.h"
-#include "Flapper/GameManager.h"
+#include "Controller/Flapper.h"
+#include "Controller/GameManager.h"
 using namespace std;
 
 
 int main()
 {
-    cout << "Hello World!\n";
+    cout << "Welcome!\n";
 
-    Engine engine;
-
-    engine.Initialize("WindowTitle!"); // C++11 string literals are constant data
-    
-    // In C++11 you can no longer assign a string literal directly to a pointer-to-non-const-char (char*) 
-
-    Sprite testsprite = Sprite("Assets/Art/BiPlane.png", Vector3(100, 100, 0));
-    testsprite.SetScale(0.20f);
-
-    Flapper player(testsprite);
-    GameManager gm(&player);
-
-
-    while (true) {   // WHILE LOOP CAUSES TEXTURE TO FALL DOWN
-        engine.Update(); 
-        player.Update();  
-        gm.Update();
-      
-       
-        engine.BeginRender();
-        player.Render();
-        engine.EndRender();
-    }
+    GameManager gameManager;
+    gameManager.Start();
+   
 
     return 0;
 }

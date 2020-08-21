@@ -39,10 +39,10 @@
     <ClCompile Include="Engine\Physics\Rigidbody.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Flapper\Flapper.cpp">
+    <ClCompile Include="Controller\Flapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Flapper\GameManager.cpp">
+    <ClCompile Include="Controller\GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,10 +68,10 @@
     <ClInclude Include="Engine\Physics\Rigidbody.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Flapper\Flapper.h">
+    <ClInclude Include="Controller\Flapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Flapper\GameManager.h">
+    <ClInclude Include="Controller\GameManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

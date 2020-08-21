@@ -29,7 +29,7 @@ void Rigidbody::Update()
 	
 	vel.x *= friction;
 	vel.y += gravity;
-	cout << "x: " << vel.x << "y: " << vel.y << endl;
+	//cout << "x: " << vel.x << "y: " << vel.y << endl;
 	*pos = *pos + (vel * Engine::GetDT());
 	vel = Vector3(0); 
 

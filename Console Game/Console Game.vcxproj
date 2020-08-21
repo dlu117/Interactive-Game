@@ -147,8 +147,8 @@
     <ClCompile Include="Engine\IO\Mouse.cpp" />
     <ClCompile Include="Engine\Physics\Rigidbody.cpp" />
     <ClCompile Include="Engine\Math\Vector3.cpp" />
-    <ClCompile Include="Flapper\Flapper.cpp" />
-    <ClCompile Include="Flapper\GameManager.cpp" />
+    <ClCompile Include="Controller\Flapper.cpp" />
+    <ClCompile Include="Controller\GameManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Engine.h" />
@@ -158,8 +158,8 @@
     <ClInclude Include="Engine\IO\Mouse.h" />
     <ClInclude Include="Engine\Physics\Rigidbody.h" />
     <ClInclude Include="Engine\Math\Vector3.h" />
-    <ClInclude Include="Flapper\Flapper.h" />
-    <ClInclude Include="Flapper\GameManager.h" />
+    <ClInclude Include="Controller\Flapper.h" />
+    <ClInclude Include="Controller\GameManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

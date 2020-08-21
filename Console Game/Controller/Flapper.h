@@ -14,6 +14,7 @@ public:
 
 	void Update();
 	void Render();
+	void Flap();
 
 	Sprite& GetSprite();
 	Rigidbody& GetRB();

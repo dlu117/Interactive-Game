@@ -15,13 +15,15 @@ Flapper::Flapper(Sprite _sprite)
 	rb.Initialize(0.8f, -10, sprite.GetPos(), sprite.GetRot(), sprite.GetScale(), sprite.GetSize());
 }
 
+void Flapper::Flap() {
+	rb.SetVel(Vector3(0,20,0));
+}
+
 
 void Flapper::Update()
 {
 
 	sprite.Update();
-
-	
 	rb.Update();
 
 }
