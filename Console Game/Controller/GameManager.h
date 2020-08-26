@@ -26,6 +26,7 @@ public:
 
 	void Start();
 	
+	void CreateLevel();
 
 
 private:
@@ -38,6 +39,18 @@ private:
 
 	Sprite StartSprite;     // can be accessed by class functions
 	Sprite GameoverSprite;
+
+	wstring slevel; 
+
+	int LevelWidth;
+	int LevelHeight;
+
+	int TileWidth;
+	int TileHeight;
+
+	float CameraPosX = 0.0f;
+	float CameraPosY = 0.0f;
+
 };
 
 

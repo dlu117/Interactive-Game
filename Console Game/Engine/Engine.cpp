@@ -3,7 +3,7 @@
 #include "IO/Keyboard.h"
 
 
-int Engine::SCREEN_WIDTH = 500;
+int Engine::SCREEN_WIDTH = 800;
 int Engine::SCREEN_HEIGHT = 650;
 GLFWwindow* Engine::window = NULL;
 float Engine::dt = 0;
@@ -90,7 +90,7 @@ void Engine::Update()
 
 void Engine::BeginRender() // current rendering to back buffer until swap buffer  
 {
-	glClearColor(0, 0, 1, 1);
+	glClearColor(0.678, 0.847, 0.902, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // bit  or ??
 
 }

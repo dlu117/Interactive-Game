@@ -140,6 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Console Game.cpp" />
+    <ClCompile Include="Controller\Crate.cpp" />
+    <ClCompile Include="Controller\Level.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\Graphics\Sprite.cpp" />
     <ClCompile Include="Engine\Graphics\Texture.cpp" />
@@ -151,6 +153,8 @@
     <ClCompile Include="Controller\GameManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Controller\Crate.h" />
+    <ClInclude Include="Controller\Level.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\Graphics\Sprite.h" />
     <ClInclude Include="Engine\Graphics\Texture.h" />
