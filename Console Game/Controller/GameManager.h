@@ -28,7 +28,8 @@ public:
 	
 	void CreateLevel();
 
-
+	void SetPlayerPos();
+	
 private:
 	void SetState(State state);
 
@@ -50,6 +51,9 @@ private:
 
 	float CameraPosX = 0.0f;
 	float CameraPosY = 0.0f;
+
+	float PlayerPosY = 0.0f;
+	float PlayerPosX = 0.0f;
 
 };
 

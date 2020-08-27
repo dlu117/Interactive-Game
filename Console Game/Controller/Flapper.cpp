@@ -15,6 +15,8 @@ Flapper::Flapper(Sprite _sprite)
 	rb.Initialize(2.0f, 0, sprite.GetPos(), sprite.GetRot(), sprite.GetScale(), sprite.GetSize());
 }
 
+
+
 void Flapper::Flap() {
 	rb.SetVel(Vector3(0,20,0));
 }

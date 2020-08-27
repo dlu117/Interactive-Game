@@ -8,16 +8,10 @@
 GameManager::GameManager()
 {
    
-    engine.Initialize("Game!"); // C++11 string literals are constant data
-    // In C++11 you can no longer assign a string literal directly to a pointer-to-non-const-char (char*) 
-
-    Sprite crateSprite = Sprite("Assets/Art/crate.png");
-    crateSprite.SetScale(0.2f);
-    Sprite userSprite = Sprite("Assets/Art/red.png", Vector3(1,1,1)); // INTIIAL POSITION ON FIRST BLOCK 
-   
+    engine.Initialize("Game!"); // C++11 string literals are constant data  // C++11 you can no longer assign a string literal directly to a pointer-to-non-const-char (char*)
+    
+    Sprite userSprite = Sprite("Assets/Art/red.png", Vector3(100,100,1)); 
     userSprite.SetScale(0.05f);
-    userSprite.MoveTo(Vector3(crateSprite.GetSize()->x * crateSprite.GetScale()->x / 2, (crateSprite.GetSize()->y * crateSprite.GetScale()->y) + userSprite.GetSize()->y * userSprite.GetScale()->y / 2, 0));
-
     flapper = new Flapper(userSprite);
 
     StartSprite = Sprite("Assets/Art/spacetostart.png", Vector3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
@@ -27,7 +21,7 @@ GameManager::GameManager()
     LevelWidth = 64;
     LevelHeight = 16;
 
-    state = State::START; // set initial set to start
+    state = State::START; 
 }
 
 
@@ -38,48 +32,76 @@ GameManager::~GameManager()
 
 void GameManager::CreateLevel() 
 {
-    LevelWidth = 64; // arbitary 
+    LevelWidth = 64; 
     LevelHeight = 14;
 
     Sprite crateSprite = Sprite("Assets/Art/crate.png");
     crateSprite.SetScale(0.1f);
 
-    TileWidth = crateSprite.GetSize()->x * crateSprite.GetScale()->x;
+    
+    TileWidth = crateSprite.GetSize()->x * crateSprite.GetScale()->x;  
     TileHeight = crateSprite.GetSize()->y * crateSprite.GetScale()->y;
 
-   
-    slevel += L"########........................................................";
-    slevel += L"................................................................";
-    slevel += L".............#########.................######...................";
-    slevel += L"................................................................";
-    slevel += L".......................#########................................";
-    slevel += L"...#######......................................................";
-    slevel += L"......................############..............................";
-    slevel += L"................................................................";
-    slevel += L"................................................................";
-    slevel += L"................................................................";
-    slevel += L"...........................................#####................";
-    slevel += L"................#####...........................................";
-    slevel += L"................................................................";
-    slevel += L"..........................######................................";
-    slevel += L"................................................................";
-    slevel += L".......................................##################.......";
 
-    // Utility Lambdas
+    // Draw Level
+    int VisibleTilesX = Engine::SCREEN_WIDTH / TileWidth;
+    int VisibleTilesY = Engine::SCREEN_HEIGHT / TileHeight;
+
+    // "."  represents empty tile position
+    // "#"  represents  position of a tile
+    slevel += L"................................................................";
+    slevel += L"................................................................";
+    slevel += L"..........................###########...........................";
+    slevel += L"........................###..................###................";
+    slevel += L"......###.............###....................###................";
+    slevel += L"....................###.........................................";
+    slevel += L"..................####..........................................";
+    slevel += L"#########################################.######################";
+    slevel += L"........................................#.#.....................";
+    slevel += L"........................################..#.....................";
+    slevel += L"........................#.................#.....................";
+    slevel += L"........................###################.....................";
+    slevel += L"........................#.......................................";
+    slevel += L"........................###################.....................";
+    slevel += L"................................................................";
+    slevel += L"................................................................";
+    slevel += L"................................................................";
+
+
+
+    // 
     auto GetTile = [&](int x, int y)
     {
         if (x >= 0 && x < LevelWidth && y >= 0 && y < LevelHeight)
-            return slevel[y * LevelWidth + x];
+            return slevel[x + y * LevelWidth];
         else
-            return L' '; //return space
+            return L' '; 
     };
 
-   
-    for (int x = 0; x < Engine::SCREEN_WIDTH / TileWidth; x++)
+    
+
+    // Camera/User represents middle of the screen
+     
+    float OffsetX = CameraPosX - (float)VisibleTilesX / 2.0f;
+    float OffsetY = CameraPosY - (float)VisibleTilesY / 2.0f;
+
+    
+    // Clamp Camera to game boundaries
+    if (OffsetX < 0) OffsetX = 0;
+    if (OffsetY < 0) OffsetY = 0;
+
+    if (OffsetX > LevelWidth * TileWidth - VisibleTilesX) OffsetX = LevelWidth * TileWidth - VisibleTilesX;
+    if (OffsetY > LevelWidth * TileHeight - VisibleTilesY) OffsetY = LevelWidth * TileHeight - VisibleTilesY;
+
+  
+
+    // Draw visible tile map
+      // offset moves us further into the 2d array
+    for (int x = 0; x < VisibleTilesX; x++)
     {
-        for (int y = 0; y < Engine::SCREEN_HEIGHT / TileHeight; y++)
+        for (int y = 0; y < VisibleTilesY; y++)
         {
-            wchar_t sTile = GetTile(x,y);
+            wchar_t sTile = GetTile(x + OffsetX, y + OffsetY);
            
             switch (sTile)
             {
@@ -97,6 +119,7 @@ void GameManager::CreateLevel()
 
     }
 
+
 }
 
 
@@ -106,7 +129,7 @@ void GameManager::Start()
  
   
 
-    while (true)  // WHILE LOOP CAUSES TEXTURE TO FALL DOWN
+    while (true) 
     {
 
         engine.Update();
@@ -143,45 +166,8 @@ void GameManager::Start()
             
             CreateLevel();
 
-            /*
-            Sprite crateSprite = Sprite("Assets/Art/crate.png");
-            crateSprite.SetScale(0.2f);
-            crateSprite.MoveTo(Vector3(10 * crateSprite.GetSize()->x * crateSprite.GetScale()->x, 1, 1));
-          
-            crateSprite.Render();
-
-            Sprite crateSprite1 = Sprite("Assets/Art/crate.png");
-            crateSprite1.SetScale(0.2f);
-            crateSprite1.MoveTo(Vector3(11 * crateSprite.GetSize()->x * crateSprite.GetScale()->x , 1, 1));
-            crateSprite1.Render();
-
-            Sprite crateSprite2 = Sprite("Assets/Art/crate.png");
-            crateSprite2.SetScale(0.2f);
-            crateSprite2.MoveTo(Vector3(12* crateSprite.GetSize()->x * crateSprite.GetScale()->x , 1, 1));
-            crateSprite2.Render();
-            */
             
-        
-            /*
-          
-            // Draw Level
-            int VisibleTilesX = Engine::SCREEN_WIDTH / nTileWidth;
-            int VisibleTilesY = Engine::SCREEN_HEIGHT / nTileHeight;
 
-            // Camera represents middle of the screen
-            float OffsetX = CameraPosX - (float)VisibleTilesX / 2.0f;
-            float OffsetY = CameraPosY - (float)VisibleTilesY / 2.0f;
-
-            // Clamp Camera
-            if (OffsetX < 0) OffsetX = 0;
-            if (OffsetY < 0) OffsetY = 0;
-            if (OffsetX > LevelWidth - VisibleTilesX) OffsetX = LevelWidth - VisibleTilesX;
-            if (OffsetY > LevelWidth - VisibleTilesY) OffsetY = LevelWidth - VisibleTilesY;
-
-
-             */
-            
-           
 
             if (Mouse::ButtonDown(GLFW_MOUSE_BUTTON_RIGHT))
             {
@@ -197,21 +183,32 @@ void GameManager::Start()
             if (Keyboard::Key(GLFW_KEY_W) || Keyboard::Key(GLFW_KEY_UP))
             {
                 flapper->GetRB().AddForce(Vector3(0, 200, 0));
+                SetPlayerPos();
+              
+    
             }
 
             if (Keyboard::Key(GLFW_KEY_S) || Keyboard::Key(GLFW_KEY_DOWN))
             {
                 flapper->GetRB().AddForce(Vector3(0, -200, 0));
+                SetPlayerPos();
+                
             }
 
             if (Keyboard::Key(GLFW_KEY_A) || Keyboard::Key(GLFW_KEY_LEFT))
             {
                 flapper->GetRB().AddForce(Vector3(-200, 0, 0));
+                SetPlayerPos();
+               
             }
 
             if (Keyboard::Key(GLFW_KEY_D) || Keyboard::Key(GLFW_KEY_RIGHT))
             {
                 flapper->GetRB().AddForce(Vector3(200, 0, 0));
+                SetPlayerPos();
+                
+                
+            
             }
             engine.EndRender();
 
@@ -244,6 +241,15 @@ void GameManager::SetState(State _state)
 
 }
 
+
+void GameManager::SetPlayerPos()
+{    
+  
+    CameraPosX = flapper->GetSprite().GetPos()->x;
+    CameraPosX = flapper->GetSprite().GetPos()->y;
+   
+    
+}
 
 
 

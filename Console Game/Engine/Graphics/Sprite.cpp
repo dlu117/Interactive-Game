@@ -45,15 +45,16 @@ void Sprite::Render()
 	glBindTexture(GL_TEXTURE_2D, texture.GetID());
 	glLoadIdentity();
 
-	//TRANSLATE -> ROTATE -> SCALE 
+
+	// Translate -> Rotate -> Scale
 	glTranslatef(pos.x, pos.y, 0);
 	glRotatef(rot, 0, 0, 1);
 	glScalef(scale.x, scale.y, 1);
 
 
-	//Rendering
+	// Rendering
 	glColor4f(1, 1, 1, 1);
-	glBegin(GL_QUADS);   // mapping texture to screen
+	glBegin(GL_QUADS);   // map centre texture to origin of window
 	{
 		glTexCoord2f(0, 0);		glVertex2i(-texture.GetWidth() / 2, -texture.GetHeight() / 2);
 		glTexCoord2f(1, 0);		glVertex2i(texture.GetWidth() / 2, -texture.GetHeight() / 2);
@@ -120,6 +121,9 @@ void Sprite::MoveLeft()
 {
 	
 	pos = pos - Vector3((speed * Engine::GetDT()), 0, 0);
+	cout << pos.x << endl;
+
+
 }
 
 
